@@ -1,0 +1,5 @@
+class Codigo{
+    constructor(cod){
+        
+    }
+}
