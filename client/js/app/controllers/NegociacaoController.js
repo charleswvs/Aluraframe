@@ -8,6 +8,8 @@ class NegociacaoController {
         this._inputData = $('#data');
         this._inputQuantidade = $('#quantidade');
         this._inputValor = $('#valor');
+
+        //o contexto de this em uma arrow function é lexical, ou seja ele não muda quando o contexto é alterado
         this._listaNegociacao = new ListaNegociacoes();
 
         this._mensagem = new Mensagem();
