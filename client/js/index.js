@@ -4,7 +4,7 @@ const campos = [
     document.querySelector('#quantidade'),
     document.querySelector('#valor')
 ];
-
+/** */
 const tbody = document.querySelector('table tbody');
 
 // adiciona um listner ao evento 'submit' da classe '.form' e executa a callback function

@@ -12,6 +12,16 @@ class NegociacaoController {
         //o contexto de this em uma arrow function é lexical, ou seja ele não muda quando o contexto é alterado
         this._listaNegociacao = new ListaNegociacoes();
 
+        /**OUTRA FORMA DE RESOLVER O PROBLEMA DE INSTANCIA**/
+
+        /* let self = this;
+
+         // aqui usei uma function tradicional, mas poderia ser uma arrow function também
+
+         this._listaNegociacoes = new ListaNegociacoes(function(model) { 
+             self._negociacoesView.update(model);
+         });*/
+         
         this._mensagem = new Mensagem();
 
         this._negociacaoView = new NegociacoesView($('#tabelaNegociacoes'));
