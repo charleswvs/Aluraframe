@@ -10,8 +10,15 @@ class NegociacaoController {
         this._inputValor = $('#valor');
 
         //o contexto de this em uma arrow function é lexical, ou seja ele não muda quando o contexto é alterado
-        this._listaNegociacao = new ListaNegociacoes();
+        this._listaNegociacao = new ListaNegociacoes( () =>
+            this._negociacaoView.update(this._listaNegociacao)
+        );
+        //Esta forma ainda não é a melhor pois ela deixa muito código de infraestrutura no modelo
 
+        //Resolveremos usamos proxy então:
+
+
+        
         /**OUTRA FORMA DE RESOLVER O PROBLEMA DE INSTANCIA**/
 
         /* let self = this;
@@ -25,7 +32,7 @@ class NegociacaoController {
         this._mensagem = new Mensagem();
 
         this._negociacaoView = new NegociacoesView($('#tabelaNegociacoes'));
-        this._negociacaoView.update(this._listaNegociacao);
+        this._negociacaoView.update(this._listaNegociacao)
 
         this._mensagemView = new MensagemView($('#mensagem'));
         this._mensagemView.update(this._mensagem);
@@ -36,7 +43,6 @@ class NegociacaoController {
         //console.log(this.inputData); 
 
         this._listaNegociacao.adiciona(this._criaNegociacao());
-        this._negociacaoView.update(this._listaNegociacao);
 
         this._mensagem.texto = "Negociacão cadastrada com sucesso!";
         this._mensagemView.update(this._mensagem);
@@ -44,12 +50,20 @@ class NegociacaoController {
         this._limpaFormulario();
     }
 
+    apaga(){
+        this._listaNegociacao.limpaLista();
+        this._mensagem.texto = "Negociações foram apagadas";
+        this._mensagemView.update(this._mensagem);
+    }
+
     _criaNegociacao() {
         return new Negociacao(
             DateHelper.textoParaData(this._inputData.value),
             this._inputQuantidade.value,
-            this._inputValor.value);
+            this._inputValor.value
+        );
     }
+
 
     _limpaFormulario(){
         //Limpa os campos do formulário
