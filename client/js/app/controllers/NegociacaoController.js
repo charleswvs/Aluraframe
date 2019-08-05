@@ -4,7 +4,6 @@ class NegociacaoController {
         //caso contrário, a variável criada como alias não funcionaria corretamente, pois
         //perderia o contexto  
         let $ = document.querySelector.bind(document);
-        let self = this;
 
         this._inputData = $('#data');
         this._inputQuantidade = $('#quantidade');
@@ -27,28 +26,16 @@ class NegociacaoController {
          });*/
 
         //Resolveremos usamos proxy então:
+        //... Que foi colocado na classe ProxyFactory
 
-        this._listaNegociacao = new Proxy(new ListaNegociacoes(), {
-            get(target, prop, receiver) {
-                //PRESTAR MUITA ATENÇÃO AO DECLARAR O TYPEOF, já que tem que colocar o target[prop]
-                if (['adiciona', 'limpaLista'].includes(prop) && typeof (target[prop]) == typeof (Function)) {
-                    return function () {
-                        Reflect.apply(target[prop], target, arguments);
-                        self._negociacaoView.update(target);
-                    }
-                }
-                return Reflect.get(target, prop, receiver);
-            }
-        });
+        this._listaNegociacoes = new Bind(
+            new ListaNegociacoes(),
+            new NegociacoesView($('#negociacoesView')),
+            'adiciona', 'limpaLista');
 
-
-        this._mensagem = new Mensagem();
-
-        this._negociacaoView = new NegociacoesView($('#tabelaNegociacoes'));
-        this._negociacaoView.update(this._listaNegociacao)
-
-        this._mensagemView = new MensagemView($('#mensagem'));
-        this._mensagemView.update(this._mensagem);
+        this._mensagem = new Bind(
+            new Mensagem(), new MensagemView($('#mensagemView')),
+            'texto');
     }
 
     adiciona(event) {
@@ -58,7 +45,6 @@ class NegociacaoController {
         this._listaNegociacao.adiciona(this._criaNegociacao());
 
         this._mensagem.texto = "Negociacão cadastrada com sucesso!";
-        this._mensagemView.update(this._mensagem);
 
         this._limpaFormulario();
     }
@@ -66,7 +52,6 @@ class NegociacaoController {
     apaga() {
         this._listaNegociacao.limpaLista();
         this._mensagem.texto = "Negociações foram apagadas";
-        this._mensagemView.update(this._mensagem);
     }
 
     _criaNegociacao() {
