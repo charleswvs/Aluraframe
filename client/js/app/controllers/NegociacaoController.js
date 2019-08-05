@@ -28,13 +28,14 @@ class NegociacaoController {
         //Resolveremos usamos proxy então:
         //... Que foi colocado na classe ProxyFactory
 
-        this._listaNegociacoes = new Bind(
+        this._listaNegociacao = new Bind(
             new ListaNegociacoes(),
             new NegociacoesView($('#negociacoesView')),
             'adiciona', 'limpaLista');
 
         this._mensagem = new Bind(
-            new Mensagem(), new MensagemView($('#mensagemView')),
+            new Mensagem(), 
+            new MensagemView($('#mensagemView')),
             'texto');
     }
 
