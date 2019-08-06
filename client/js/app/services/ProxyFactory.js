@@ -1,5 +1,5 @@
 //Factories são classes que geram um determinado tipo de objeto
-//Não é uma regra mas se pode criar métodos estáticos para não precisar instanciá-la
+//Não é uma regra mas se pode criar métodos estáticos para não precisar instanciá-la olá
 class ProxyFactory {
 
     static create(objeto, props, acao) {
@@ -8,7 +8,7 @@ class ProxyFactory {
 
             get(target, prop, receiver) {
 
-                if (props.includes(prop) && ProxyFactory._ehFuncao(target[prop])) {
+                if (props.includes(prop) && ProxyFactory._ehFuncao(target[prop])) { 
 
                     return function () {
 
