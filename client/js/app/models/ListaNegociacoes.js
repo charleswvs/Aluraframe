@@ -17,4 +17,8 @@ class ListaNegociacoes{
         this._negociacoes = [];
         //this._armadilinha();
     }
+
+    get volumeTotal() {
+        return this._negociacoes.reduce((total, n) => total + n.volume, 0.0);
+     }
 }
