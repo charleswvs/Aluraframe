@@ -55,6 +55,20 @@ class NegociacaoController {
         this._mensagem.texto = "Negociações foram apagadas";
     }
 
+    importaNegociacoes(){
+        let service = new NegociacaoService();
+
+        Promise.all([service.obterNegociacoesDaSemana(), 
+            service.obterNegociacoesDaSemanaPassada(),
+            service.obterNegociacoesDaSemanaRetrasada()]
+            ).then(negociacoes =>{
+            negociacoes.reduce((prev,cur)=> prev.concat(cur),[])
+            .forEach(negociacao => {
+                this._listaNegociacao.adiciona(negociacao);
+            });
+        })
+    }
+
     _criaNegociacao() {
         return new Negociacao(
             DateHelper.textoParaData(this._inputData.value),
@@ -62,7 +76,6 @@ class NegociacaoController {
             this._inputValor.value
         );
     }
-
 
     _limpaFormulario() {
         //Limpa os campos do formulário
