@@ -34,7 +34,7 @@ class NegociacaoController {
             'adiciona', 'limpaLista');
 
         this._mensagem = new Bind(
-            new Mensagem(), 
+            new Mensagem(),
             new MensagemView($('#mensagemView')),
             'texto');
     }
@@ -55,21 +55,16 @@ class NegociacaoController {
         this._mensagem.texto = "Negociações foram apagadas";
     }
 
-    importaNegociacoes(){
+    importaNegociacoes() {
         let service = new NegociacaoService();
 
-        Promise.all([service.obterNegociacoesDaSemana(), 
-            service.obterNegociacoesDaSemanaAnterior(),
-            service.obterNegociacoesDaSemanaRetrasada()]
-            ).then(negociacoes =>{
-            negociacoes.reduce((prev,cur)=> prev.concat(cur),[])
-            .forEach(negociacao => {
-                console.log(negociacao);
-                this._listaNegociacao.adiciona(negociacao);
-            });
-        }).catch(erro =>{ 
-            this._mensagem.texto = erro;
-        });
+        service
+            .obterNegociacoes()
+            .then(negociacoes => {
+                negociacoes.forEach(negociacao => this._listaNegociacao.adiciona(negociacao));
+                this._mensagem.texto = 'Negociações do período importadas com sucesso';
+            })
+            .catch(error => this._mensagem.texto = error);
     }
 
     _criaNegociacao() {
