@@ -59,14 +59,17 @@ class NegociacaoController {
         let service = new NegociacaoService();
 
         Promise.all([service.obterNegociacoesDaSemana(), 
-            service.obterNegociacoesDaSemanaPassada(),
+            service.obterNegociacoesDaSemanaAnterior(),
             service.obterNegociacoesDaSemanaRetrasada()]
             ).then(negociacoes =>{
             negociacoes.reduce((prev,cur)=> prev.concat(cur),[])
             .forEach(negociacao => {
+                console.log(negociacao);
                 this._listaNegociacao.adiciona(negociacao);
             });
-        })
+        }).catch(erro =>{ 
+            this._mensagem.texto = erro;
+        });
     }
 
     _criaNegociacao() {

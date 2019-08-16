@@ -35,7 +35,7 @@ api.listaAnterior = function(req, res) {
 	setTimeout(function() {
 		res.json(negociacoesAnteriores);	
 	}, 500);
-    
+    z
 };
 
 api.listaRetrasada = function(req, res) {
