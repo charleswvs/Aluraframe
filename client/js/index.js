@@ -7,7 +7,7 @@ const campos = [
 /** */
 const tbody = document.querySelector('table tbody');
 
-// adiciona um listner ao evento 'submit' da classe '.form' e executa a callback function
+// adiciona um listener ao evento 'submit' da classe '.form' e executa a callback function
 document.querySelector('.form').addEventListener('submit', function(e){
     //Previne que o navegador execute a função de recarregar a página
     e.preventDefault();

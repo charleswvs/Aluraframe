@@ -31,12 +31,15 @@ class NegociacaoController {
         this._listaNegociacao = new Bind(
             new ListaNegociacoes(),
             new NegociacoesView($('#negociacoesView')),
-            'adiciona', 'limpaLista');
+            'adiciona', 'limpaLista', 'ordena', 'inverteOrdem');
 
         this._mensagem = new Bind(
             new Mensagem(),
             new MensagemView($('#mensagemView')),
             'texto');
+
+        // Propriedade pega o estado atual da ordenação, que no início é = 0
+        this._ordemAtual = '';
     }
 
     adiciona(event) {
@@ -66,6 +69,17 @@ class NegociacaoController {
             })
             .catch(error => this._mensagem.texto = error);
     }
+
+    ordena(coluna) {
+        if(this._ordemAtual == coluna){
+            this._listaNegociacao.inverteOrdem();
+        }else{
+            this._listaNegociacao.ordena((a, b) => a[coluna] - b[coluna]);
+        }
+        this._ordemAtual = coluna;
+    }
+
+    
 
     _criaNegociacao() {
         return new Negociacao(

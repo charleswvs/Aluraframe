@@ -18,6 +18,14 @@ class ListaNegociacoes{
         //this._armadilinha();
     }
 
+    ordena(criterio){
+        this._negociacoes.sort(criterio);
+    }
+
+    inverteOrdem(){
+        this._negociacoes.reverse();
+    }
+
     get volumeTotal() {
         return this._negociacoes.reduce((total, n) => total + n.volume, 0.0);
      }

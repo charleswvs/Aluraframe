@@ -38,6 +38,8 @@ class HttpService {
 
             let xhr = new XMLHttpRequest();
             xhr.open("POST", url, true);// Descobrir o que significa o terceiro parâmetro
+
+            //Especifica o conteúdo que será enviado no POST
             xhr.setRequestHeader("Content-type", "application/json");
             xhr.onreadystatechange = () => {
 
@@ -54,6 +56,5 @@ class HttpService {
             };
             xhr.send(JSON.stringify(dado)); // usando JSON.stringifly para converter objeto em uma string no formato JSON.
         });
-
     }
 }
