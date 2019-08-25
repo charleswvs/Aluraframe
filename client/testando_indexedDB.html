@@ -92,3 +92,12 @@
 </body>
 
 </html>
+
+/*
+    Para criar uma API de conexão:
+    - criar um classe ConnectionFactoryr
+    - getConnection vai ser um método estático
+    - getConnection vai retornar uma promise
+    - não importa o número de vezes que eu chamar o método estático, a conexão tem que ser a mesma
+    - o programador não pode chamar close diretamente. Ela só pode ser fachada através da própria conectionFactory
+*/
