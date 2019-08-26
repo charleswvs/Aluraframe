@@ -40,6 +40,17 @@ class NegociacaoController {
 
         // Propriedade pega o estado atual da ordenação, que no início é = 0
         this._ordemAtual = '';
+
+        // Lista todas as negociações que estão no banco:
+        ConnectionFactory
+            .getConnection()
+            .then(connection => new NegociacaoDAO(connection))
+            .then(dao => dao.listaTodos())
+            .then(negociacoes =>{
+                negociacoes.forEach(negociacao =>{
+                    this._listaNegociacao.adiciona(negociacao);
+                })
+            })
     }
 
     adiciona(event) {
