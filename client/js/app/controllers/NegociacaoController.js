@@ -61,14 +61,15 @@ class NegociacaoController {
     }
 
     apaga() {
-        ConnectionFactory
-            .getConnection()
-            .then(connection => new NegociacaoDAO(connection))
-            .then(dao => dao.apagaTodos())
+        new NegociacaoService()
+            .apaga()
             .then(mensagem =>{
                 this._mensagem.texto = mensagem;
                 this._listaNegociacao.limpaLista();
-            });
+            })
+            .catch(erro =>{
+                this._mensagem.texto = erro;
+            })
     }
 
     importaNegociacoes() {
@@ -117,16 +118,12 @@ class NegociacaoController {
     }
     _init(){
         // Lista todas as negociações que estão no banco:
-        ConnectionFactory
-            .getConnection()
-            .then(connection => new NegociacaoDAO(connection))
-            .then(dao => dao.listaTodos())
-            .then(negociacoes => 
+        new NegociacaoService()
+            .lista()
+            .then(negociacoes =>
                 negociacoes.forEach(negociacao => 
                     this._listaNegociacao.adiciona(negociacao)))
-            .catch(erro => {
-                this._mensagem.texto = erro;
-            })
+            .catch(erro => this._mensagem.texto = erro);
         
         //irá importar as negociacoes conforme o tempo estipulado:
         setInterval(()=>{
