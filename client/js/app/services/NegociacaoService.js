@@ -1,14 +1,25 @@
 class NegociacaoService {
-    
+
     constructor() {
-        
+
         this._http = new HttpService();
     }
-    
+
+    cadastra(negociacao) {
+        ConnectionFactory
+            .getConnection()
+            .then(conexao => new NegociacaoDAO(conexao))
+            .then(dao = dao.adiciona(negociacao))
+            .then(() => 'Negociação adicionada com sucesso')
+            .catch(() => {
+                throw new Erro('Não foi possível adicionar a negociação')
+            });
+    }
+
     obterNegociacoesDaSemana() {
-       
-       return new Promise((resolve, reject) => {
-        
+
+        return new Promise((resolve, reject) => {
+
             this._http
                 .get('negociacoes/semana')
                 .then(negociacoes => {
@@ -18,14 +29,14 @@ class NegociacaoService {
                 .catch(erro => {
                     console.log(erro);
                     reject('Não foi possível obter as negociações da semana');
-                });  
-       });        
+                });
+        });
     }
-    
+
     obterNegociacoesDaSemanaAnterior() {
-       
-       return new Promise((resolve, reject) => {
-        
+
+        return new Promise((resolve, reject) => {
+
             this._http
                 .get('negociacoes/anterior')
                 .then(negociacoes => {
@@ -35,16 +46,16 @@ class NegociacaoService {
                 .catch(erro => {
                     console.log(erro);
                     reject('Não foi possível obter as negociações da semana anterior');
-                });  
-       }); 
-       
-        
+                });
+        });
+
+
     }
-    
+
     obterNegociacoesDaSemanaRetrasada() {
-       
-       return new Promise((resolve, reject) => {
-        
+
+        return new Promise((resolve, reject) => {
+
             this._http
                 .get('negociacoes/retrasada')
                 .then(negociacoes => {
@@ -54,11 +65,11 @@ class NegociacaoService {
                 .catch(erro => {
                     console.log(erro);
                     reject('Não foi possível obter as negociações da semana retrasada');
-                });  
-       }); 
-    }    
-    
-    
+                });
+        });
+    }
+
+
     obterNegociacoes() {
 
         return new Promise((resolve, reject) => {
@@ -71,12 +82,11 @@ class NegociacaoService {
 
                 let negociacoes = periodos
                     .reduce((dados, periodo) => dados.concat(periodo), [])
-                    .map(dado => new Negociacao(new Date(dado.data), dado.quantidade, dado.valor ));
+                    .map(dado => new Negociacao(new Date(dado.data), dado.quantidade, dado.valor));
 
                 resolve(negociacoes);
 
             }).catch(erro => reject(erro));
         });
-    }    
+    }
 }
-
