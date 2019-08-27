@@ -53,14 +53,11 @@ class NegociacaoController {
         new NegociacaoService()
             .cadastra(negociacao)
             .then((mensagem)=>{
-                this._listaNegociacao.negociacoes.adiciona(negociacao);
+                this._listaNegociacao.adiciona(negociacao);
                 this._mensagem.texto = mensagem;
                 this._limpaFormulario();
             })
             .catch(erro => this._mensagem.texto = erro);
-
-        
-
     }
 
     apaga() {

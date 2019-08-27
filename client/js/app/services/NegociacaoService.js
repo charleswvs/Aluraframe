@@ -6,10 +6,10 @@ class NegociacaoService {
     }
 
     cadastra(negociacao) {
-        ConnectionFactory
+        return ConnectionFactory
             .getConnection()
             .then(conexao => new NegociacaoDAO(conexao))
-            .then(dao = dao.adiciona(negociacao))
+            .then(dao => dao.adiciona(negociacao))
             .then(() => 'Negociação adicionada com sucesso')
             .catch(() => {
                 throw new Erro('Não foi possível adicionar a negociação')
