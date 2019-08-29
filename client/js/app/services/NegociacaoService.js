@@ -36,8 +36,23 @@ class NegociacaoService {
             .then(()=> 'Negociações Apagadas com sucesso')
             .catch(erro=>{
                 console.log(erro);
-                throw new Error('Não foi possível obter as negociações')
+                throw new Error('Não foi possível apagar as negociações')
                 
+            })
+    }
+
+    importa(listaAtual){
+        
+        return this
+            .obterNegociacoes()
+            .then(negociacoes =>
+                negociacoes.filter(negociacao => //filtrando negociações que já estão na minha lista
+                    !listaAtual.some(negociacaoExistente =>
+                       negociacao.isEqual(negociacaoExistente)))
+            )
+            .catch(erro =>{
+                console.log(erro);
+                throw new Error('Não foi possível obter as negociações para importar');
             })
     }
 

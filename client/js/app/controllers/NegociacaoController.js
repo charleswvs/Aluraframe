@@ -41,18 +41,20 @@ class NegociacaoController {
         // Propriedade pega o estado atual da ordenação, que no início é = 0
         this._ordemAtual = '';
 
+        this._service = new NegociacaoService();
+
         this._init();
     }
-    
+
     adiciona(event) {
         event.preventDefault();
         //console.log(this.inputData); 
 
         let negociacao = this._criaNegociacao();
 
-        new NegociacaoService()
+        this._service
             .cadastra(negociacao)
-            .then((mensagem)=>{
+            .then((mensagem) => {
                 this._listaNegociacao.adiciona(negociacao);
                 this._mensagem.texto = mensagem;
                 this._limpaFormulario();
@@ -61,33 +63,34 @@ class NegociacaoController {
     }
 
     apaga() {
-        new NegociacaoService()
+        this._service
             .apaga()
-            .then(mensagem =>{
+            .then(mensagem => {
                 this._mensagem.texto = mensagem;
                 this._listaNegociacao.limpaLista();
             })
-            .catch(erro =>{
+            .catch(erro => {
                 this._mensagem.texto = erro;
             })
+
+        // TODO: Criar uma forma de apagar somente uma negociação
+        // - Criar um botão em cada negociação renderizada
+        // - Pegar de alguma forma sua pocição no array
+        // - Apagar no banco, na lista de negociações e remover da view
+        // - Faça tudo isso utilizando primises, DAO e Negociação Service
+
     }
 
     importaNegociacoes() {
-        let service = new NegociacaoService();
-
-        service
-            .obterNegociacoes()
-            .then(negociacoes =>
-                negociacoes.filter(negociacao => //filtrando negociações que já estão na minha lista
-                    !this._listaNegociacao.negociacoes.some(negociacaoExistente =>
-                        JSON.stringify(negociacao) ==JSON.stringify(negociacaoExistente)))
-            )
+        this._service
+            .importa(this._listaNegociacao.negociacoes)
             .then(negociacoes => {
-                negociacoes.forEach(negociacao => 
+                negociacoes.forEach(negociacao =>
                     this._listaNegociacao.adiciona(negociacao));
                 this._mensagem.texto = 'Negociações do período importadas com sucesso';
             })
             .catch(error => this._mensagem.texto = error);
+
     }
 
     ordena(coluna) {
@@ -116,17 +119,19 @@ class NegociacaoController {
         this._inputValor.value = '0';
         this._inputData.focus();
     }
-    _init(){
+
+    
+    _init() {
         // Lista todas as negociações que estão no banco:
-        new NegociacaoService()
+        this._service
             .lista()
             .then(negociacoes =>
-                negociacoes.forEach(negociacao => 
+                negociacoes.forEach(negociacao =>
                     this._listaNegociacao.adiciona(negociacao)))
             .catch(erro => this._mensagem.texto = erro);
-        
+
         //irá importar as negociacoes conforme o tempo estipulado:
-        setInterval(()=>{
+        setInterval(() => {
             this.importaNegociacoes();
         }, 3000)
     }

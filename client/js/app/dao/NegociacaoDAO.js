@@ -60,11 +60,6 @@ class NegociacaoDAO{
     }
 
     apagaTodos(){
-        // TODO: Criar uma forma de apagar somente uma negociação
-        // - Criar um botão em cada negociação renderizada
-        // - Pegar de alguma forma seu número de registro
-        // - Apagar no banco, na lista de negociações e remover da view
-
         return new Promise ((resolve, reject)=>{
             let request = this._connection
                 .transaction([this._store], 'readwrite')
