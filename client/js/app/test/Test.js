@@ -3,3 +3,5 @@ class Codigo{
         
     }
 }
+
+//trecho excluido de HttpService.js

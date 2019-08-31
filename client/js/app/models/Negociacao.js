@@ -29,7 +29,7 @@ class Negociacao {
         return this._valor;
     }
     
-    isEquals(outraNegociacao) {        
+    isEqual(outraNegociacao) {        
         return JSON.stringify(this) == JSON.stringify(outraNegociacao)
     }
 }
