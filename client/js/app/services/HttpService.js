@@ -1,19 +1,15 @@
 class HttpService {
 
-    _handleErrors(res){
-        //method to test fetch api result
-
+    _handleErrors(res) {
         if(!res.ok) throw new Error(res.statusText);
         return res;
     }
 
     get(url) {
+
         return fetch(url)
             .then(res => this._handleErrors(res))
-            .then(res => {
-                res.json();
-            }) //avisa que quer o retorno em json
-    
+            .then(res => res.json());
     }
 
     post(url, dado) {
