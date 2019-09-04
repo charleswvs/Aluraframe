@@ -1,4 +1,4 @@
-export class ListaNegociacoes {
+class ListaNegociacoes {
 
     constructor() {
         

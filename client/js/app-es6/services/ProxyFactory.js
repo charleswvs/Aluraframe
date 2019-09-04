@@ -1,4 +1,4 @@
-export class ProxyFactory {
+class ProxyFactory {
     
     static create(objeto, props, acao) {
      

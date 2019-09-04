@@ -1,4 +1,4 @@
-export class Negociacao {
+class Negociacao {
     
     constructor(data, quantidade, valor) {
         

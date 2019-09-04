@@ -1,12 +1,3 @@
-import {ListaNegociacoes} from '../models/ListaNegociacoes';
-import {Mensagem} from '../models/Mensagem';
-import {NegociacoesView} from '../views/NegociacoesView';
-import {MensagemView} from '../views/MensagemView';
-import {NegociacaoService} from '../services/NegociacaoService';
-import {DateHelper} from '../helpers/DateHelper';
-import {Bind} from '../helpers/Bind';
-import {Negociacao} from '../models/Negociacao';
-
 class NegociacaoController {
     
     constructor() {
@@ -43,9 +34,9 @@ class NegociacaoController {
                     this._listaNegociacoes.adiciona(negociacao)))
             .catch(erro => this._mensagem.texto = erro);
             
-        // setInterval(() => {
-        //     this.importaNegociacoes();
-        // }, 3000);                
+        setInterval(() => {
+            this.importaNegociacoes();
+        }, 3000);                
         
     }
 
@@ -112,12 +103,4 @@ class NegociacaoController {
         }
         this._ordemAtual = coluna;    
     }
-}
-
-let negociacaoController = new NegociacaoController();
-
-export function currentInstance() {
-
-    return negociacaoController;
-
 }

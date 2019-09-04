@@ -1,4 +1,4 @@
-export class DateHelper {
+class DateHelper {
     
     constructor() {
         
