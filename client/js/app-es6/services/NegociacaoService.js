@@ -1,4 +1,9 @@
-class NegociacaoService {
+import {HttpService} from './HttpService';
+import {ConnectionFactory} from './ConnectionFactory';
+import {NegociacaoDao} from '../dao/NegociacaoDao';
+import {Negociacao} from '../models/Negociacao';
+
+export class NegociacaoService {
     
     constructor() {
         
@@ -70,7 +75,7 @@ class NegociacaoService {
 
         return ConnectionFactory
             .getConnection()
-            .then(connection => new NegociacaoDAO(connection))
+            .then(connection => new NegociacaoDao(connection))
             .then(dao => dao.adiciona(negociacao))
             .then(() => 'Negociação adicionada com sucesso')
             .catch(erro => {
@@ -83,7 +88,7 @@ class NegociacaoService {
 
         return ConnectionFactory
                 .getConnection()
-                .then(connection => new NegociacaoDAO(connection))
+                .then(connection => new NegociacaoDao(connection))
                 .then(dao => dao.listaTodos())
                 .catch(erro => {
                     console.log(erro);
@@ -95,7 +100,7 @@ class NegociacaoService {
 
         return ConnectionFactory
             .getConnection()
-            .then(connection => new NegociacaoDAO(connection))
+            .then(connection => new NegociacaoDao(connection))
             .then(dao => dao.apagaTodos())
             .then(() => 'Negociações apagadas com sucesso')
             .catch(erro => {
