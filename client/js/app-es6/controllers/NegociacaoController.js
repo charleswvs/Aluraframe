@@ -43,9 +43,9 @@ class NegociacaoController {
                     this._listaNegociacoes.adiciona(negociacao)))
             .catch(erro => this._mensagem.texto = erro);
             
-        setInterval(() => {
-            this.importaNegociacoes();
-        }, 3000);                
+        // setInterval(() => {
+        //     this.importaNegociacoes();
+        // }, 3000);                
         
     }
 

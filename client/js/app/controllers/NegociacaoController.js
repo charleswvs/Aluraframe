@@ -89,9 +89,9 @@ System.register(['../models/ListaNegociacoes', '../models/Mensagem', '../views/N
                             return _this._mensagem.texto = erro;
                         });
 
-                        setInterval(function () {
-                            _this.importaNegociacoes();
-                        }, 3000);
+                        // setInterval(() => {
+                        //     this.importaNegociacoes();
+                        // }, 3000);                
                     }
                 }, {
                     key: 'adiciona',
