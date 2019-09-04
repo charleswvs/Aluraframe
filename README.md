@@ -7,4 +7,5 @@ App for studying advanced javascript conceipts, such as:
   <li>Fetch API</li>
   <li>Pattern Factory</li>
   <li>Babbel</li>
+  <li>Build an API</li>
  </ul>
