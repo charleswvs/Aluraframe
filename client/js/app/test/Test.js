@@ -1,12 +1,25 @@
 "use strict";
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+System.register([], function (_export, _context) {
+    "use strict";
 
-var Codigo = function Codigo(cod) {
-    //
+    var Codigo;
 
-    _classCallCheck(this, Codigo);
-};
+    function _classCallCheck(instance, Constructor) {
+        if (!(instance instanceof Constructor)) {
+            throw new TypeError("Cannot call a class as a function");
+        }
+    }
 
-//trecho excluido de HttpService.js
+    return {
+        setters: [],
+        execute: function () {
+            Codigo = function Codigo(cod) {
+                //
+
+                _classCallCheck(this, Codigo);
+            };
+        }
+    };
+});
 //# sourceMappingURL=Test.js.map
