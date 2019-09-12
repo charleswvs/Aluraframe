@@ -8,4 +8,5 @@ App for studying advanced javascript conceipts, such as:
   <li>Pattern Factory</li>
   <li>Babel</li>
   <li>Build an API</li>
+  <li>Use webpack properly</li>
  </ul>

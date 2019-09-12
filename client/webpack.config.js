@@ -5,7 +5,8 @@ module.exports = {
     entry: './app-src/app.js', //primeiro módulo carregado na aplicação
     output: {
         filename: 'bundle.js',
-        path: path.resolve(__dirname, 'dist') //"__dirname" é uma variável do node.js
+        path: path.resolve(__dirname, 'dist'), //"__dirname" é uma variável do node.js
+        publicPath: 'dist'
     },
     module:{
         rules:[
