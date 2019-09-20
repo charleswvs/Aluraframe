@@ -4,6 +4,7 @@ import { Negociacao } from './domain/index.js';
 //usando bootstrap como um módulo
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
+import '../css/meucss.css';
 
 const controller = new NegociacaoController();
 const negociacao = new Negociacao(new Date(), 1, 200);
